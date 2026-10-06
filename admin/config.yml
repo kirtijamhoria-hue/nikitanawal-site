@@ -1,0 +1,101 @@
+backend:
+  name: github
+  repo: YOUR-GITHUB-USERNAME/nikitanawal-website   # <-- change this to your actual repo
+  branch: main
+  base_url: https://YOUR-WORKER-SUBDOMAIN.workers.dev   # <-- change this after deploying the OAuth proxy
+
+# This uses a small free OAuth proxy (see /oauth-proxy/worker.js and the
+# README section "Future-proof admin login") instead of Netlify's Git
+# Gateway, which Netlify has deprecated. Access is controlled by WHO you
+# add as a collaborator on the GitHub repo itself — go to your repo on
+# github.com -> Settings -> Collaborators -> Add people, and invite
+# whichever email/GitHub account should be allowed to log into /admin
+# (e.g. Nitesh's GitHub account, plus your own while testing).
+
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  # ---- Projects (portfolio) ----
+  # Decap edits this as ONE json file containing a list of project objects.
+  # Every field here maps directly to the "Add Project" form we discussed.
+  - name: "projects"
+    label: "Portfolio Projects"
+    files:
+      - name: "projects"
+        label: "All Projects"
+        file: "content/projects.json"
+        format: "json"
+        fields:
+          - name: "items"
+            label: "Projects"
+            label_singular: "Project"
+            widget: "list"
+            summary: "{{fields.title}} — {{fields.category}}"
+            fields:
+              - { name: "title", label: "Title", widget: "string", hint: "e.g. Serene Living Suite" }
+              - { name: "slug", label: "Slug (URL)", widget: "string", hint: "lowercase-with-hyphens, e.g. serene-living-suite. Do not change after publishing — it breaks shared links." }
+              - name: "category"
+                label: "Category"
+                widget: "select"
+                options: ["Residential", "Commercial", "Retail", "Hospitality"]
+              - name: "style"
+                label: "Style"
+                widget: "select"
+                options: ["Modern", "Contemporary", "Traditional", "Minimal"]
+              - { name: "location", label: "Location", widget: "string", required: false, hint: "e.g. Vijay Nagar, Indore" }
+              - { name: "area", label: "Area", widget: "string", required: false, hint: "e.g. 2,400 sq ft" }
+              - { name: "scope", label: "Scope", widget: "string", required: false, hint: "e.g. Full Residential Interior" }
+              - { name: "duration", label: "Duration", widget: "string", required: false, hint: "e.g. 5 months" }
+              - { name: "hero_image", label: "Hero Image", widget: "image", hint: "⚠ Recommended before upload: resize to ~2000px wide, under 400KB (use squoosh.app, free). Large images slow the site down for visitors." }
+              - name: "gallery"
+                label: "Gallery Images"
+                widget: "list"
+                field: { name: "image", label: "Image", widget: "image", hint: "⚠ Recommended: ~1600–2000px wide, under 300KB each (squoosh.app). Keeps the project page loading fast." }
+                required: false
+              - { name: "video_embed_url", label: "Walkthrough Video Embed URL", widget: "string", required: false, hint: "⚠ Never upload a raw video file — always upload to YouTube or Vimeo first, then paste the EMBED link here (e.g. https://www.youtube.com/embed/VIDEO_ID, not the share link). This keeps the video off the site itself so it never slows down page loading." }
+              - { name: "narrative", label: "Project Narrative", widget: "text", required: false, hint: "Separate paragraphs with a blank line." }
+              - { name: "client_quote", label: "Client Quote", widget: "text", required: false }
+              - { name: "client_name", label: "Client Name", widget: "string", required: false, hint: "Only publish with the client's permission." }
+              - { name: "featured", label: "Show on homepage as Featured Project", widget: "boolean", default: false }
+              - { name: "display_order", label: "Display Order (lower = first)", widget: "number", default: 10 }
+
+  # ---- Site-wide settings ----
+  - name: "settings"
+    label: "Site Settings"
+    files:
+      - name: "settings"
+        label: "General Settings"
+        file: "content/settings.json"
+        format: "json"
+        fields:
+          - { name: "studio_name", label: "Studio Name", widget: "string" }
+          - { name: "founder_name", label: "Founder Name", widget: "string" }
+          - { name: "tagline", label: "Homepage Tagline", widget: "text" }
+          - { name: "philosophy_heading", label: "Philosophy Heading", widget: "string" }
+          - { name: "philosophy_body", label: "Philosophy Body", widget: "text", hint: "Separate paragraphs with a blank line." }
+          - { name: "founder_photo", label: "Founder Photo", widget: "image", hint: "⚠ Recommended: ~1000px wide, under 150KB (squoosh.app). This is a small photo — it doesn't need to be large." }
+          - { name: "hero_image", label: "Homepage Hero Image", widget: "image", hint: "⚠ Recommended: ~2400px wide, under 400KB (squoosh.app). This is the biggest image on the site — compressing it matters most." }
+          - { name: "email", label: "Contact Email", widget: "string" }
+          - { name: "phone_primary", label: "Primary Phone (consultation number)", widget: "string", hint: "Shown on WhatsApp button, contact page and footer everywhere." }
+          - { name: "phone_secondary", label: "Secondary Phone", widget: "string", required: false }
+          - { name: "whatsapp_number", label: "WhatsApp Number", widget: "string", hint: "Digits only with country code, e.g. 918982448009" }
+          - { name: "address", label: "Studio Address", widget: "text" }
+          - { name: "map_embed_url", label: "Google Maps Embed URL", widget: "string", required: false }
+          - { name: "instagram_url", label: "Instagram URL", widget: "string", required: false }
+          - { name: "facebook_url", label: "Facebook URL", widget: "string", required: false }
+          - { name: "linkedin_url", label: "LinkedIn URL", widget: "string", required: false }
+          - { name: "pinterest_url", label: "Pinterest URL", widget: "string", required: false }
+          - name: "services"
+            label: "Services"
+            widget: "list"
+            fields:
+              - { name: "name", label: "Name", widget: "string" }
+              - { name: "description", label: "Description", widget: "text" }
+              - { name: "image", label: "Image", widget: "image", required: false, hint: "⚠ Recommended: ~1200px wide, under 250KB (squoosh.app)." }
+          - name: "testimonials"
+            label: "Testimonials"
+            widget: "list"
+            fields:
+              - { name: "quote", label: "Quote", widget: "text" }
+              - { name: "name", label: "Client Name", widget: "string" }

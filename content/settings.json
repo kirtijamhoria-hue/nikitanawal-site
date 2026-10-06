@@ -1,0 +1,30 @@
+{
+  "studio_name": "Nikita Nawal Design Studio",
+  "founder_name": "Nitesh Nawal",
+  "tagline": "Let's work together to design a joyful, cohesive, inspiring space — one that's a reflection of your unique personality, interests, and day-to-day needs.",
+  "philosophy_heading": "Spaces that reflect you, inspire you, every day.",
+  "philosophy_body": "We believe the best spaces are truly individual and a reflection of you or your business. We create thoughtful interiors that delight and inspire you on a daily basis.\n\nFounded in Indore, Nikita Nawal Design Studio brings a personal, boutique approach to every project — from intimate residences to large commercial developments.",
+  "email": "Contact.nnds@gmail.com",
+  "phone_primary": "+91-89824-48009",
+  "phone_secondary": "+91-97537-59494",
+  "whatsapp_number": "918982448009",
+  "address": "302, Aakansha Trade Centre, South Tukoganj, Indore (M.P.) 452001",
+  "map_embed_url": "https://www.google.com/maps?q=Aakansha+Trade+Centre+South+Tukoganj+Indore&output=embed",
+  "instagram_url": "https://instagram.com/nikitanawaldesignstudio",
+  "facebook_url": "https://facebook.com/",
+  "linkedin_url": "https://linkedin.com/",
+  "pinterest_url": "https://pinterest.com/",
+  "founder_photo": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&q=80",
+  "hero_image": "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1400&q=80",
+  "services": [
+    { "name": "Residential", "description": "Full-home interiors designed around how you actually live.", "image": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80" },
+    { "name": "Commercial", "description": "Offices, retail and hospitality spaces built for brand and function.", "image": "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80" },
+    { "name": "Turnkey", "description": "End-to-end design, procurement and execution, handled entirely by us.", "image": "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800&q=80" },
+    { "name": "Modular", "description": "Custom modular kitchens, wardrobes and storage, precisely fitted.", "image": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80" },
+    { "name": "Consultation", "description": "One-time design direction if you're planning to execute it yourself.", "image": "https://images.unsplash.com/photo-1615873968403-89e068629265?w=800&q=80" }
+  ],
+  "testimonials": [
+    { "quote": "Nikita Nawal Design Studio understood exactly what we wanted, even when we struggled to put it into words ourselves.", "name": "Priya Sharma, Indore" },
+    { "quote": "Thoughtful, responsive, and genuinely invested in getting every detail right.", "name": "Rohit Malhotra, Indore" }
+  ]
+}

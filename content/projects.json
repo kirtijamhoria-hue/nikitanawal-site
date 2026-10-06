@@ -1,0 +1,68 @@
+[
+  {
+    "slug": "serene-living-suite",
+    "title": "Serene Living Suite",
+    "category": "Residential",
+    "style": "Modern",
+    "location": "Vijay Nagar, Indore",
+    "area": "2,400 sq ft",
+    "scope": "Full Residential Interior",
+    "duration": "5 months",
+    "hero_image": "https://images.unsplash.com/photo-1600210492493-0946911123ea?w=1600&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&q=80",
+      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&q=80",
+      "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=1200&q=80",
+      "https://images.unsplash.com/photo-1615873968403-89e068629265?w=1200&q=80"
+    ],
+    "video_embed_url": "",
+    "narrative": "This 2,400 sq ft residence in Vijay Nagar was designed for a young family seeking a warm, modern home that balances functionality with everyday comfort.\n\nWe began with an open-concept living and dining layout, using a neutral palette of ivory, warm wood tones, and soft brass accents to create a calm, cohesive flow throughout the space.\n\nCustom storage solutions and thoughtfully layered lighting ensure the home feels effortless to live in, while remaining true to the family's personal style.",
+    "client_quote": "Nikita Nawal Design Studio understood exactly what we wanted, even when we struggled to put it into words ourselves. Our home finally feels like us.",
+    "client_name": "Priya Sharma, Indore",
+    "featured": true,
+    "display_order": 10
+  },
+  {
+    "slug": "riverside-office-fitout",
+    "title": "Riverside Office Fit-Out",
+    "category": "Commercial",
+    "style": "Contemporary",
+    "location": "AB Road, Indore",
+    "area": "5,800 sq ft",
+    "scope": "Commercial Office Fit-out",
+    "duration": "4 months",
+    "hero_image": "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1600&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=1200&q=80",
+      "https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=1200&q=80",
+      "https://images.unsplash.com/photo-1524749292158-7540c2494485?w=1200&q=80"
+    ],
+    "video_embed_url": "",
+    "narrative": "A growing consulting firm needed an office that reflected their brand while supporting focused, collaborative work.\n\nWe designed a layout that balances open workstations with quiet meeting pods, using warm materials and greenery to soften what could otherwise feel corporate.",
+    "client_quote": "The space changed how our team works together. Clients notice it the moment they walk in.",
+    "client_name": "Rohit Malhotra, Indore",
+    "featured": true,
+    "display_order": 20
+  },
+  {
+    "slug": "minimalist-master-bedroom",
+    "title": "Minimalist Master Suite",
+    "category": "Residential",
+    "style": "Minimal",
+    "location": "Palasia, Indore",
+    "area": "480 sq ft",
+    "scope": "Single Room Renovation",
+    "duration": "6 weeks",
+    "hero_image": "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=1600&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1616627561950-9f746e330187?w=1200&q=80",
+      "https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?w=1200&q=80"
+    ],
+    "video_embed_url": "",
+    "narrative": "A calm, clutter-free master suite designed for a client who wanted their bedroom to feel like a genuine retreat from a busy schedule.\n\nWe stripped the palette back to warm neutrals and natural textures, letting a single statement headboard and layered lighting do the work.",
+    "client_quote": "",
+    "client_name": "",
+    "featured": false,
+    "display_order": 30
+  }
+]
