@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Services — Nikita Nawal Design Studio</title>
+<meta name="description" content="Residential, commercial, turnkey, modular and consultation interior design services in Indore." />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..600&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+<header id="site-header"></header>
+
+<main>
+  <section style="padding-bottom:0;">
+    <div class="wrap reveal">
+      <div class="hero-eyebrow">SERVICES</div>
+      <h1 style="max-width:16ch;">Design support at every stage.</h1>
+      <p class="hero-sub">From a single room to a full turnkey build, here's how we work with you.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap reveal" id="servicesDetail"></div>
+  </section>
+
+  <section>
+    <div class="wrap reveal">
+      <div class="section-head"><h2>Our process</h2></div>
+      <div class="services-grid">
+        <div class="service-card"><h3>01 — Discovery</h3><p>Understanding your space, budget and how you live day to day.</p></div>
+        <div class="service-card"><h3>02 — Concept</h3><p>Layouts, mood boards and material palettes, refined with you.</p></div>
+        <div class="service-card"><h3>03 — Execution</h3><p>Procurement, vendor management and on-site supervision.</p></div>
+        <div class="service-card"><h3>04 — Handover</h3><p>Final styling and walkthrough before the space becomes yours.</p></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="site-footer"></div>
+
+<script src="js/partials.js"></script>
+<script src="js/main.js"></script>
+<script>
+document.body.dataset.depth = "0";
+async function loadServices() {
+  await initPartials("services.html");
+  const res = await fetch("content/settings.json");
+  const settings = await res.json();
+  const wrap = document.getElementById("servicesDetail");
+  wrap.innerHTML = `<div class="services-grid">${(settings.services || [])
+    .map((s) => `<div class="service-card"><h3>${s.name}</h3><p>${s.description}</p></div>`)
+    .join("")}</div>`;
+  initReveal();
+}
+loadServices();
+</script>
+</body>
+</html>

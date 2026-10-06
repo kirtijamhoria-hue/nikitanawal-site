@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Contact — Nikita Nawal Design Studio</title>
+<meta name="description" content="Book a consultation with Nikita Nawal Design Studio, Indore. Call, WhatsApp or send us a message." />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..600&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+<header id="site-header"></header>
+
+<main>
+  <section style="padding-bottom:0;">
+    <div class="wrap reveal">
+      <div class="hero-eyebrow">GET IN TOUCH</div>
+      <h1 style="max-width:16ch;">Book a free consultation.</h1>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap contact-grid reveal">
+      <div>
+        <!-- Note: this form currently only opens the visitor's email/WhatsApp app.
+             To actually receive submissions, connect Netlify Forms (add
+             data-netlify="true" below) or another form backend. -->
+        <form id="contactForm">
+          <div class="field">
+            <label for="name">Name</label>
+            <input type="text" id="name" required />
+          </div>
+          <div class="field">
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" required />
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input type="email" id="email" />
+          </div>
+          <div class="field">
+            <label for="projectType">Project Type</label>
+            <select id="projectType">
+              <option>Residential</option>
+              <option>Commercial</option>
+              <option>Turnkey</option>
+              <option>Modular</option>
+              <option>Consultation Only</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="budget">Budget Range</label>
+            <input type="text" id="budget" placeholder="e.g. ₹10–15 lakh" />
+          </div>
+          <div class="field">
+            <label for="message">Message</label>
+            <textarea id="message"></textarea>
+          </div>
+          <button type="submit" class="btn btn-solid">Send Message</button>
+        </form>
+      </div>
+
+      <div>
+        <div class="contact-info-item">
+          <span class="contact-info-k">EMAIL</span>
+          <a id="contactEmail" href="#"></a>
+        </div>
+        <div class="contact-info-item">
+          <span class="contact-info-k">PHONE</span>
+          <div id="contactPhones"></div>
+        </div>
+        <div class="contact-info-item">
+          <span class="contact-info-k">STUDIO</span>
+          <div id="contactAddress"></div>
+        </div>
+        <a id="whatsappBtn" href="#" target="_blank" rel="noopener" class="btn btn-outline">Chat on WhatsApp</a>
+
+        <div class="map-frame">
+          <iframe id="mapFrame" src="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="site-footer"></div>
+
+<script src="js/partials.js"></script>
+<script src="js/main.js"></script>
+<script>
+document.body.dataset.depth = "0";
+
+async function loadContact() {
+  await initPartials("contact.html");
+  const res = await fetch("content/settings.json");
+  const s = await res.json();
+
+  document.getElementById("contactEmail").textContent = s.email;
+  document.getElementById("contactEmail").href = `mailto:${s.email}`;
+  document.getElementById("contactPhones").innerHTML = `
+    <div><a href="tel:${(s.phone_primary || "").replace(/-/g, "")}">${s.phone_primary}</a></div>
+    ${s.phone_secondary ? `<div><a href="tel:${s.phone_secondary.replace(/-/g, "")}">${s.phone_secondary}</a></div>` : ""}
+  `;
+  document.getElementById("contactAddress").textContent = s.address;
+  document.getElementById("mapFrame").src = s.map_embed_url || "";
+  if (s.whatsapp_number) {
+    document.getElementById("whatsappBtn").href =
+      `https://wa.me/${s.whatsapp_number}?text=${encodeURIComponent("Hi! I'd like to book a consultation.")}`;
+  }
+
+  document.getElementById("contactForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const name = document.getElementById("name").value;
+    const projectType = document.getElementById("projectType").value;
+    const message = document.getElementById("message").value;
+    const body = `Hi, I'm ${name}. I'm interested in a ${projectType} project.\n\n${message}`;
+    window.location.href = `mailto:${s.email}?subject=${encodeURIComponent("New enquiry from website")}&body=${encodeURIComponent(body)}`;
+  });
+
+  initReveal();
+}
+loadContact();
+</script>
+</body>
+</html>

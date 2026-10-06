@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title id="pageTitle">Project — Nikita Nawal Design Studio</title>
+<meta name="description" id="pageDesc" content="An interior design project by Nikita Nawal Design Studio, Indore." />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..600&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+<header id="site-header"></header>
+
+<main>
+  <div class="wrap" style="padding-top:32px;">
+    <a href="portfolio.html" class="btn btn-outline" style="margin-bottom:24px;">&larr; Back to Projects</a>
+  </div>
+
+  <div id="projectContent">
+    <div class="wrap"><div class="skeleton" style="aspect-ratio:16/9; margin-bottom:32px;"></div></div>
+  </div>
+</main>
+
+<div id="site-footer"></div>
+
+<script src="js/partials.js"></script>
+<script src="js/main.js"></script>
+<script>
+document.body.dataset.depth = "0";
+
+function embedIsVideo(url) {
+  return url && (url.includes("youtube.com/embed") || url.includes("player.vimeo.com"));
+}
+
+async function loadProject() {
+  await initPartials("portfolio.html");
+
+  const params = new URLSearchParams(window.location.search);
+  const slug = params.get("slug");
+  const res = await fetch("content/projects.json");
+  const projects = await res.json();
+  const project = projects.find((p) => p.slug === slug);
+  const content = document.getElementById("projectContent");
+
+  if (!project) {
+    content.innerHTML = `
+      <div class="wrap empty-state">
+        <h2>Project not found</h2>
+        <p>This project may have been renamed or removed. <a href="portfolio.html">Browse the full portfolio &rarr;</a></p>
+      </div>`;
+    return;
+  }
+
+  document.getElementById("pageTitle").textContent = `${project.title} — Nikita Nawal Design Studio`;
+  document.getElementById("pageDesc").setAttribute("content", (project.narrative || "").slice(0, 155));
+
+  const galleryHtml = (project.gallery || [])
+    .map((src) => `<img src="${src}" alt="${project.title} — gallery photo" loading="lazy" />`)
+    .join("");
+
+  const narrativeHtml = (project.narrative || "")
+    .split("\n\n")
+    .map((p) => `<p>${p}</p>`)
+    .join("");
+
+  const videoHtml = embedIsVideo(project.video_embed_url)
+    ? `
+    <div class="video-frame" id="videoFrame" data-src="${project.video_embed_url}">
+      <img src="${project.hero_image}" alt="Walkthrough video preview" />
+      <div class="play-btn"></div>
+    </div>`
+    : "";
+
+  const quoteHtml = project.client_quote
+    ? `
+    <blockquote class="cs-quote">
+      &ldquo;${project.client_quote}&rdquo;
+      <div class="cs-quote-name">${project.client_name || ""}</div>
+    </blockquote>`
+    : "";
+
+  // Next project navigation
+  const idx = projects.findIndex((p) => p.slug === slug);
+  const next = projects[(idx + 1) % projects.length];
+
+  content.innerHTML = `
+    <div class="cs-hero wrap reveal">
+      <img src="${project.hero_image}" alt="${project.title}" />
+    </div>
+    <div class="wrap">
+      <div class="reveal" style="max-width:70ch; margin-top:40px;">
+        <div class="hero-eyebrow">${project.category}${project.style ? " · " + project.style : ""}</div>
+        <h1>${project.title}</h1>
+      </div>
+
+      <div class="cs-meta reveal">
+        <div><span class="cs-meta-k">Location</span><span class="cs-meta-v">${project.location || "—"}</span></div>
+        <div><span class="cs-meta-k">Area</span><span class="cs-meta-v">${project.area || "—"}</span></div>
+        <div><span class="cs-meta-k">Scope</span><span class="cs-meta-v">${project.scope || "—"}</span></div>
+        <div><span class="cs-meta-k">Duration</span><span class="cs-meta-v">${project.duration || "—"}</span></div>
+      </div>
+
+      <div class="cs-narrative reveal">${narrativeHtml}</div>
+
+      ${galleryHtml ? `<div class="cs-gallery reveal">${galleryHtml}</div>` : ""}
+
+      ${videoHtml ? `<div class="reveal">${videoHtml}</div>` : ""}
+
+      ${quoteHtml}
+
+      <div class="cs-next reveal">
+        <span></span>
+        <a href="project.html?slug=${next.slug}">
+          <span class="k">Next Project</span>
+          <h3>${next.title} &rarr;</h3>
+        </a>
+      </div>
+    </div>
+  `;
+
+  // Click-to-play video: iframe is only inserted after a real click,
+  // so nothing loads or autoplays until the visitor asks for it.
+  const frame = document.getElementById("videoFrame");
+  if (frame) {
+    frame.addEventListener("click", () => {
+      const src = frame.dataset.src + (frame.dataset.src.includes("?") ? "&" : "?") + "autoplay=1";
+      frame.innerHTML = `<iframe src="${src}" title="${project.title} walkthrough" allow="autoplay; encrypted-media" allowfullscreen loading="lazy"></iframe>`;
+    });
+  }
+
+  initReveal();
+}
+
+loadProject();
+</script>
+</body>
+</html>
