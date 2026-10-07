@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: kirtijamhoria-hue/nikitanawal-website
+  repo: kirtijamhoria-hue/nikitanawal-site
   branch: main
   base_url: https://nikitanawal-oauth.kirtijamhoria.workers.dev
 
