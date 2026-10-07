@@ -1,8 +1,8 @@
 backend:
   name: github
-  repo: YOUR-GITHUB-USERNAME/nikitanawal-website   # <-- change this to your actual repo
+  repo: kirtijamhoria-hue/nikitanawal-website
   branch: main
-  base_url: https://YOUR-WORKER-SUBDOMAIN.workers.dev   # <-- change this after deploying the OAuth proxy
+  base_url: https://nikitanawal-oauth.kirtijamhoria.workers.dev
 
 # This uses a small free OAuth proxy (see /oauth-proxy/worker.js and the
 # README section "Future-proof admin login") instead of Netlify's Git
