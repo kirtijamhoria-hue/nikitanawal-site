@@ -1043,3 +1043,63 @@ h3 { font-size: 1.6rem; line-height: 1.2; }
 }
 .nav-links a.nav-admin-link::after { display: none; }
 .nav-links a.nav-admin-link:hover { background: var(--brass); color: var(--white); }
+
+
+/* ============================================
+   FINISHING PASS: spacing + section patterns
+   (matched to the Hercules reference)
+   ============================================ */
+:root { --max-width: 1500px; --gutter: clamp(20px, 3.2vw, 56px); }
+
+/* Tighter, more consistent rhythm between sections */
+section { padding: clamp(52px, 6vw, 88px) 0; }
+.section-head { margin-bottom: clamp(36px, 4.5vw, 64px); }
+
+/* Small label above headings, left aligned */
+.eyebrow-left {
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.78rem;
+  color: var(--brass);
+  margin-bottom: 0.8em;
+}
+.section-head-center { justify-content: center; text-align: center; }
+
+/* Plain "VIEW ALL" text link */
+.link-caps {
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.8rem;
+  text-decoration: none;
+  color: var(--charcoal-soft);
+  padding-bottom: 4px;
+  border-bottom: 1px solid transparent;
+  transition: color 0.3s var(--ease-smooth), border-color 0.3s var(--ease-smooth);
+}
+.link-caps:hover { color: var(--brass); border-bottom-color: var(--brass); }
+
+/* Featured grid: landscape tiles, caption on hover (always shown on touch) */
+.strip-item { aspect-ratio: 4/3; }
+.strip-caption {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.45s var(--ease-smooth), transform 0.45s var(--ease-smooth);
+}
+.strip-item:hover .strip-caption,
+.strip-item:focus-visible .strip-caption { opacity: 1; transform: none; }
+@media (hover: none) { .strip-caption { opacity: 1; transform: none; } }
+
+/* Services: separate portrait cards with breathing room, name underneath */
+.services-showcase {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: clamp(16px, 2.2vw, 36px);
+}
+.services-showcase .service-card { background: transparent; padding: 0; }
+.services-showcase .service-card:hover { background: transparent; }
+.services-showcase .service-card::before { display: none; }
+.services-showcase .service-card-img { margin: 0 0 18px; aspect-ratio: 3/4; border-bottom: none; }
+.services-showcase .service-card h3 { font-size: 1.5rem; margin: 0 0 0.3em; }
+.services-showcase .service-card p { font-size: 0.92rem; }
+@media (max-width: 1000px) { .services-showcase { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 640px)  { .services-showcase { grid-template-columns: repeat(2, 1fr); } }

@@ -7,7 +7,7 @@
 <meta name="description" content="Nikita Nawal Design Studio creates thoughtful, personal interiors for homes and businesses in Indore. Residential, commercial and turnkey design." />
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏠</text></svg>" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..600&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
@@ -18,7 +18,7 @@
   <section class="hero-full" id="heroFull">
     <div class="hero-full-overlay"></div>
     <div class="hero-full-content">
-      <div class="hero-full-eyebrow" id="heroStudioLine">NIKITA NAWAL DESIGN STUDIO · INDORE</div>
+      <div class="hero-full-eyebrow" id="heroStudioLine">INTERIOR DESIGN STUDIO · INDORE</div>
       <h1 id="heroHeading">Let's work together to design a joyful, cohesive, inspiring space — one that's a reflection of your unique personality.</h1>
       <div class="hero-actions">
         <a href="portfolio.html" class="btn btn-outline-light">View Our Work</a>
@@ -31,13 +31,16 @@
   <section>
     <div class="wrap">
       <div class="section-head reveal">
-        <h2>Recent work</h2>
-        <a href="portfolio.html" class="btn btn-outline">View full portfolio</a>
+        <div>
+          <div class="eyebrow-left">SELECTED WORK</div>
+          <h2>Featured Projects</h2>
+        </div>
+        <a href="portfolio.html" class="link-caps">View all</a>
       </div>
       <div class="strip reveal" id="featuredStrip">
-        <div class="strip-item skeleton" style="aspect-ratio:3/4;"></div>
-        <div class="strip-item skeleton" style="aspect-ratio:3/4;"></div>
-        <div class="strip-item skeleton" style="aspect-ratio:3/4;"></div>
+        <div class="strip-item skeleton" style="aspect-ratio:4/3;"></div>
+        <div class="strip-item skeleton" style="aspect-ratio:4/3;"></div>
+        <div class="strip-item skeleton" style="aspect-ratio:4/3;"></div>
       </div>
     </div>
   </section>
@@ -45,10 +48,13 @@
   <!-- SERVICES -->
   <section>
     <div class="wrap">
-      <div class="section-head reveal">
-        <h2>What we do</h2>
+      <div class="section-head section-head-center reveal">
+        <div>
+          <div class="eyebrow-center">WHAT WE DO</div>
+          <h2>Our Services</h2>
+        </div>
       </div>
-      <div class="services-grid reveal" id="servicesGrid"></div>
+      <div class="services-showcase reveal" id="servicesGrid"></div>
     </div>
   </section>
 
@@ -112,12 +118,14 @@ async function loadHome() {
 
   // Hero (full-bleed background image + overlay text)
   document.getElementById("heroHeading").textContent = settings.tagline || "";
-  document.getElementById("heroStudioLine").textContent = `${(settings.studio_name || "").toUpperCase()} · INDORE`;
-  const heroFull = document.getElementById("heroFull");
+    const heroFull = document.getElementById("heroFull");
   if (settings.hero_image) heroFull.style.backgroundImage = `url('${settings.hero_image}')`;
 
   // Featured strip
-  const featured = projects.filter((p) => p.featured).slice(0, 3);
+  const sorted = [...projects].sort((a, b) => (a.display_order || 0) - (b.display_order || 0));
+  let featured = sorted.filter((p) => p.featured).slice(0, 6);
+  if (featured.length < 3) featured = featured.concat(sorted.filter((p) => !p.featured)).slice(0, 3);
+  else if (featured.length < 6) featured = featured.slice(0, 3);
   const strip = document.getElementById("featuredStrip");
   if (featured.length) {
     strip.innerHTML = featured
