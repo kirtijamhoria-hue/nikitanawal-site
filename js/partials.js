@@ -34,7 +34,7 @@ function renderNav(activePage) {
       <button class="nav-toggle" id="navToggle" aria-label="Open menu">&#9776;</button>
       <ul class="nav-links" id="navLinks">
         ${linkHtml}
-        <li><a href="${pathTo("admin/index.html")}" class="nav-admin-link" id="adminLink">Admin</a></li>
+        <li class="nav-admin-item" style="display:none"><a href="${pathTo("admin/")}" class="nav-admin-link" id="adminLink">Admin</a></li>
       </ul>
       <a href="${pathTo("contact.html")}" class="nav-cta">Book a Consultation</a>
     </div>
@@ -165,7 +165,15 @@ async function initPartials(activePage) {
   // never true security on its own.
   const adminLink = document.getElementById("adminLink");
   if (adminLink) {
-    const hasSession = !!localStorage.getItem("decap-cms-user");
+    let hasSession = false;
+    try {
+      // Decap stores its login under a key ending in "cms-user"
+      // (the exact name differs between versions, so check any match).
+      hasSession = Object.keys(localStorage).some(
+        (k) => /cms-user$/.test(k) && !!localStorage.getItem(k)
+      );
+    } catch (e) { /* storage blocked: leave the link hidden */ }
     adminLink.classList.toggle("visible", hasSession);
+    adminLink.parentElement.style.display = hasSession ? "" : "none";
   }
 }

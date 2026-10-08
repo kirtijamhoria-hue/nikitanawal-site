@@ -13,7 +13,7 @@
   --white: #ffffff;
   --line: rgba(43, 40, 35, 0.14);
 
-  --serif: "Fraunces", Georgia, "Times New Roman", serif;
+  --serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
   --sans: "Work Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
   --max-width: 1240px;
@@ -1014,3 +1014,32 @@ section { padding: clamp(64px, 10vw, 128px) 0; }
   .filters-category, .filters-style { gap: 8px; }
   .filter-box { padding: 0.6em 1em; font-size: 0.74rem; }
 }
+
+
+/* ============================================
+   TYPOGRAPHY REFINEMENT: Cormorant Garamond
+   (lighter, higher-contrast serif; sizes bumped
+   because this face has a small x-height)
+   ============================================ */
+h1, h2, h3, h4 { font-weight: 500; letter-spacing: -0.005em; }
+h1 { font-size: clamp(3rem, 6vw, 5.4rem); line-height: 1.05; }
+h2 { font-size: clamp(2.3rem, 4.2vw, 3.7rem); line-height: 1.1; }
+h3 { font-size: 1.6rem; line-height: 1.2; }
+.brand-name { font-size: 1.55rem; font-weight: 500; }
+.footer-brand-name { font-size: 1.6rem; }
+.hero-full-content { max-width: 1120px; }
+.hero-full h1 { font-size: clamp(2.4rem, 4.6vw, 4.1rem); max-width: none; line-height: 1.08; font-weight: 500; }
+.testimonial { font-size: clamp(1.6rem, 2.8vw, 2.2rem); }
+.cs-quote { font-size: clamp(1.5rem, 2.6vw, 2rem); }
+.cs-meta-v { font-size: 1.3rem; }
+
+
+/* Admin link (only shown to a browser with an active admin login) */
+.nav-links a.nav-admin-link {
+  color: var(--brass);
+  border: 1px solid var(--brass);
+  padding: 0.35em 0.9em;
+  border-radius: 2px;
+}
+.nav-links a.nav-admin-link::after { display: none; }
+.nav-links a.nav-admin-link:hover { background: var(--brass); color: var(--white); }
