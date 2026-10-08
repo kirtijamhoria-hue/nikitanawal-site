@@ -114,7 +114,7 @@ async function loadHome() {
     fetch("content/projects.json"),
   ]);
   const settings = await settingsRes.json();
-  const projects = await projectsRes.json();
+  const projects = asProjectList(await projectsRes.json());
 
   // Hero (full-bleed background image + overlay text)
   document.getElementById("heroHeading").textContent = settings.tagline || "";

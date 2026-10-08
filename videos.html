@@ -43,7 +43,7 @@ function embedIsVideo(url) {
 async function loadVideos() {
   await initPartials("videos.html");
   const res = await fetch("content/projects.json");
-  const projects = (await res.json()).filter((p) => embedIsVideo(p.video_embed_url));
+  const projects = asProjectList(await res.json()).filter((p) => embedIsVideo(p.video_embed_url));
   const grid = document.getElementById("videoGrid");
 
   if (!projects.length) {

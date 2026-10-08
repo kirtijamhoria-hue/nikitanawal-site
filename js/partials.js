@@ -177,3 +177,10 @@ async function initPartials(activePage) {
     adminLink.parentElement.style.display = hasSession ? "" : "none";
   }
 }
+
+
+// The admin panel saves projects as { "items": [...] }; older files were a bare list.
+// This accepts either, so every page keeps working.
+function asProjectList(data) {
+  return Array.isArray(data) ? data : (data && data.items) || [];
+}

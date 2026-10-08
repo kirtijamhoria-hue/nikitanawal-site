@@ -43,7 +43,7 @@ document.body.dataset.depth = "0";
 async function loadPortfolio() {
   await initPartials("portfolio.html");
   const res = await fetch("content/projects.json");
-  const projects = (await res.json()).sort((a, b) => (a.display_order || 0) - (b.display_order || 0));
+  const projects = asProjectList(await res.json()).sort((a, b) => (a.display_order || 0) - (b.display_order || 0));
 
   const categories = ["All", ...new Set(projects.map((p) => p.category).filter(Boolean))];
   const styles = ["All", ...new Set(projects.map((p) => p.style).filter(Boolean))];
